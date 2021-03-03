@@ -82,6 +82,8 @@ namespace APIGateway
             {
                 endpoints.MapControllers();
             });
+
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
             app.UseOcelot().Wait();
         }
     }
