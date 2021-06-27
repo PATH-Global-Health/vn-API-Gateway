@@ -30,11 +30,11 @@ namespace APIGateway
                         config
                             .MinimumLevel.Verbose()
                             .Enrich.FromLogContext()
-                            .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("https://elasticsearch-es-http:9200"))
+                            .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("https://202.78.227.175:32500"))
                             {
                                 AutoRegisterTemplate = true,
                                 ModifyConnectionSettings = x => x.ServerCertificateValidationCallback((o, certificate, arg3, arg4) => { return true; })
-                                                                 .BasicAuthentication("elastic", "9UM40HQ6hy540aup1xZb0q6r"),
+                                                                 .BasicAuthentication("elastic", "AvXK7uP7814I5IF0X80YJaq1"),
                             });
 
                     });

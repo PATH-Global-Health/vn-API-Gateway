@@ -44,8 +44,10 @@ namespace APIGateway
             {
                 var origins = new string[]
                 {
-                    "http://cds.hcdc.vn",
-                    "http://localhost:3000"
+                    "https://cds.hcdc.vn",
+                    "http://localhost:3000",
+                    "http://test.hcdc.vn",
+                    "http://abcde.hcdc.vn"
                 };
                 options.AddDefaultPolicy(
                                   builder =>
