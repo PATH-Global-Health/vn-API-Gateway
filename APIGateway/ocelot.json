@@ -1,57 +1,20 @@
 ﻿{
+  "DelegatingHandlers": [
+    "CustomHandler"
+  ],
   "Routes": [
     {
-      "ModuleName": "Infection Chain Management - DEV",
+      "ModuleName": "Permission Validation - Test",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "202.78.227.203",
+          "Port": 31590
+        }
+      ],
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/v1/infectionChain/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
-      "ServiceName": "infection-chain-dev",
-      "LoadBalancerOptions": {
-        "Type": "LeastConnection"
-      }
-    },
-    {
-      "ModuleName": "Profile Management - DEV",
-      "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/api/v1/profile/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
-      "ServiceName": "profile-management-dev",
-      "LoadBalancerOptions": {
-        "Type": "LeastConnection"
-      }
-    },
-    {
-      "ModuleName": "Examination Management - DEV",
-      "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/api/v1/examination/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
-      "ServiceName": "examination-management-staging",
-      "LoadBalancerOptions": {
-        "Type": "LeastConnection"
-      }
-    },
-    {
-      "ModuleName": "User Management - COMMON",
-      "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/api/v1/auth/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
-      "ServiceName": "user-management",
-      "LoadBalancerOptions": {
-        "Type": "LeastConnection"
-      }
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ]
     }
-  ],
-  "GlobalConfiguration": {
-    "ServiceDiscoveryProvider": {
-      "Scheme": "http",
-      "Host": "consul-consul-server",
-      "Port": 8500,
-      "Type": "PollConsul",
-      "PollingInterval": 100
-    }
-  }
+  ]
 }

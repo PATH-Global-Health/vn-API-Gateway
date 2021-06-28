@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using APIGateway.Middlewares;
+using APIGateway.OcelotHandlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,7 +37,8 @@ namespace APIGateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => {
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) =>
+            {
                 return true;
             };
             services.AddControllers();
@@ -45,9 +47,11 @@ namespace APIGateway
                 var origins = new string[]
                 {
                     "https://cds.hcdc.vn",
-                    "http://localhost:3000",
+                    "http://localhost:48200",
+                    "https://localhost:44329",
                     "http://test.hcdc.vn",
-                    "http://abcde.hcdc.vn"
+                    "http://abcde.hcdc.vn",
+                    "http://202.78.227.203:31590"
                 };
                 options.AddDefaultPolicy(
                                   builder =>
@@ -58,9 +62,12 @@ namespace APIGateway
                                              .AllowCredentials();
                                   });
             });
-            services.AddOcelot(Configuration).AddConsul();
+            services.AddOcelot(Configuration)
+                    .AddDelegatingHandler<CustomHandler>(true)
+                    .AddConsul();
             // Register the Swagger services
             services.AddSwaggerDocument();
+            services.AddHttpClient();
             Console.WriteLine("v1.0.1");
         }
 
@@ -79,6 +86,7 @@ namespace APIGateway
 
             app.UseRouting();
             app.UseCors();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
